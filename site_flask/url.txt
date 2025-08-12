@@ -1,0 +1,1 @@
+postgres://gfinance_user:U9XIEqi85s4U2x4dpjmeo0qYUqZqNxeR@dpg-d2d9tjjuibrs739dt6c0-a:5432/gfinance
