@@ -1,0 +1,19 @@
+{% extends "home.html" %}
+{% block title %}Regristrar gasto {% endblock %}
+{% block body %}
+<div class="container">
+<div class="box">
+<h2>Registrar gasto</h2>
+<form method="POST">
+    {{form.csrf_token}}
+    <table>
+    <tr><td>{{form.descricao.label}}</td><td> {{form.descricao(class="input")}}</td></tr>
+    <tr><td>{{form.valor.label}}</td><td>{{form.valor(class="input")}}</td></tr>
+<tr><td>{{form.categoria.label}}</td><td>{{form.input_categoria()}} {{form.categoria()}}</td></tr>
+    <tr><td>{{form.btsalvar(class="button")}}</td>
+    <td><div class="fakebutton"><a href="gastos">Voltar</a></div></td></tr>
+    </table>
+</form>
+</div>
+</div>
+{% endblock %}

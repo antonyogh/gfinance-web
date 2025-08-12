@@ -1,0 +1,16 @@
+{% extends "home.html" %}
+{% block title %} Configurar Conta{% endblock %}
+{% block body %}
+<div class="container">
+<div class="box">
+<form method="POST">
+    {{form.csrf_token}}
+<table><tr><div class="label">Configurar conta</div></tr>
+<tr><td>{{form.saldo.label}}</td><td>{{form.saldo(class="input")}}</td></tr>
+<tr><td colspan="2">{{form.btsalvar(class="button")}}</td></tr>
+   
+</tr></table>
+</form>
+</div>
+</div>
+{% endblock %}

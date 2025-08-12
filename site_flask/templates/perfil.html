@@ -1,0 +1,8 @@
+{% extends "home.html" %}
+{% block title %} Perfil | {{id}} {% endblock %}
+{% block body %} Olá {{id}}
+<body class="body">
+<a href="{{url_for('home')}}">Home</a>
+<a href="{{url_for('logout')}}">Sair</a>
+</body>
+{% endblock %}

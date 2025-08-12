@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% block title %} Criar conta {% endblock %}
+{% block body %}
+<body>
+<div class="container">
+<div class="box">
+
+<form method="POST">
+{{form.csrf_token}}
+<h2>Criar conta</h2>
+{{form.usuario.label}}{{form.usuario(class="input")}}
+
+<p>{{form.senha.label}}{{form.senha(class="input")}}</p>
+<p>{{form.confirma_senha.label}}{{form.confirma_senha(class="input")}}</p>
+{{form.btcriar(class="button")}}</form>
+
+Já tem conta? <a href="{{url_for('login')}}">Faça login</a>
+</div>
+</div>
+</body>
+{% endblock %}

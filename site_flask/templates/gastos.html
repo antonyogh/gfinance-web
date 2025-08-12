@@ -1,0 +1,106 @@
+{% extends "home.html" %}
+{% block title %}Gastos{% endblock %}
+{% block body %}
+<body>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<ul>
+    <li><a href="home">Home</a></li>
+    <li><a href="gastos" class="active">Despesas</a></li>
+    <li><a href="receitas">Receitas</a></li>
+    <li><a href="sobre">Sobre</a></li>
+    <li style="float: right;"><a href="logout">Sair</a></li>
+</ul>
+
+<div class="vbox">
+    <fieldset style="width: 100%;">
+        <legend>Gastos</legend>
+
+        <div class="acoes">
+        <form action="addgasto"><button type="submit" >+</button></form>
+        {{form.di.label(style="margin:10px;")}} {{form.di()}}
+        <form>
+        <button type="submit">-></button>
+        </form>
+        </div>
+        
+        <div class="acoes">
+       <div class="table-div">
+       <table>
+            <thead><tr><th>Gasto</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+                <th>Data</th></tr></thead>
+       <tbody>
+        {% for g in lista_gastos %}
+            <tr><td style="text-align: left;">{{g.descricao}}</td>
+                <td>R$ {{g.valor}}</td>
+                <td>{{g.categoria}}</td>
+                <td>{{g.data}}</td>
+                <td><form action="remove/{{g.id}}"><button>X</button></form></td>
+            </tr>
+            {% endfor %}
+        </tbody></table></div>
+    <fieldset style="width: 30%;">
+        <legend>Valor gastos</legend>
+        <table><tr><td>Hoje:</td><td><h4>R$ {{vg['gd']}}</h4></td></tr>
+            <tr><td>Semana</td><td><h4>R$ {{vg['gs']}}</h4></td></tr>
+            <tr><td>Mês</td><td><h4>R$ {{vg['gm']}}</h4></td></tr>
+            <tr><td>Todos</td><td><h4>R$ {{vg['gt']}}</h4></td></tr>
+           
+        </table>
+    </fieldset>
+    </div>
+
+        <div class="hbox">
+            <fieldset style="width:50%;">
+               
+                <div id="pie"></div>
+            </fieldset>
+        <fieldset style="width: 50%;">
+            <div id="grafico_gastos_mes"></div>
+        </fieldset>
+        </div>
+
+    </fieldset>
+    <fieldset>
+        <legend>Contas</legend>
+        Sem contas
+    </fieldset>
+</div>
+
+<script>
+    const config = {displayModeBar:false};
+    const ctg = JSON.parse('{{lc | tojson | safe}}');
+    const v = JSON.parse('{{lv | tojson | safe}}');
+    const data = [{labels:ctg,values:v,type:"pie",textinfo:"label+percent+value"}];
+    const layout = {title:"Gastos por categoria",template: {layout: {
+                font: {
+                    family: 'Arial',
+                    size: 12,
+                    color: '#333'
+                },
+                paper_bgcolor: 'rgb(231, 225, 225)',
+                plot_bgcolor: 'rgb(231, 225, 225)'
+            }
+        }};
+    Plotly.newPlot("pie",data,layout,config);
+
+    const meses = JSON.parse('{{meses | tojson | safe }}')
+    const valor = JSON.parse('{{valor | tojson | safe}}')
+    const dados = [{x:meses,y:valor,orientation:'v',type:'bar'}]
+    const lt = {title:"Gastos por mês",template: {layout: {
+                font: {
+                    family: 'Arial',
+                    size: 14,
+                    color: '#333'
+                },
+                paper_bgcolor: 'rgb(231, 225, 225)',
+                plot_bgcolor: 'rgb(231, 225, 225)'
+            }
+        }};
+    Plotly.newPlot('grafico_gastos_mes',dados,lt,config)
+
+</script>
+
+</body>
+{% endblock %}
