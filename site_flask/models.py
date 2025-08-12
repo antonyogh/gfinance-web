@@ -35,5 +35,5 @@ class Receita(db.Model):
     data = db.Column(db.String,default=datetime.strftime(datetime.now(),'%d/%m/%Y'))
     id_usuario = db.Column(db.Integer,db.ForeignKey('usuario.id'),nullable=False)
 
-with app.app_context():
-    db.create_all()
+#with app.app_context():
+ #   db.create_all()
