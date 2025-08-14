@@ -7,11 +7,11 @@
 <div class="container">
 <div class="box">
 <h2>Login</h2>
-{% with message = get_flashed_messages() %}
+<!--{% with message = get_flashed_messages() %}
     {% if message %}
         <div> {{ message[0]}}</div>
     {% endif %}
-{% endwith %}
+{% endwith %} -->
 <form method="POST">
 {{form.csrf_token}}
 <p>{{form.usuario.label}}{{form.usuario(class="input")}}</p>
